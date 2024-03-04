@@ -124,6 +124,14 @@ def add_cofe():
 
 
 # HTTP PUT/PATCH - Update Record
+@app.route('/update-price/<cafe_id>', methods=['PATCH'])
+def update_price(cafe_id):
+    cafe_id=cafe_id
+    cofe_to_update=db.get_or_404(Cafe, cafe_id)
+    new_price = request.args.get("new_price")
+    cofe_to_update.coffee_price = new_price
+    db.session.commit()
+    return jsonify(response = {"success": "The price has been successfully updated"})
 
 # HTTP DELETE - Delete Record
 
